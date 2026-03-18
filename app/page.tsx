@@ -93,7 +93,7 @@ export default function Home() {
 
         {/* Work Experience */}
         <section id="experience">
-          <h2 className="text-2xl font-bold tracking-tight mb-8">💼 Work Experience</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-8">👩‍💻 Work Experience</h2>
           <div className="flex flex-col gap-4">
             {experience.map((project) => (
               <div
