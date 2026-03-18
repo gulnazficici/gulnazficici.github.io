@@ -1,0 +1,48 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+html {
+  scroll-behavior: smooth;
+}
+
+:root {
+  --bg: #FFFFFF;
+  --card: #F4F4F5;
+  --card-hover: #EBEBED;
+  --border: #E4E4E7;
+  --text: #0B0B0C;
+  --text-muted: #71717A;
+  --accent: #A78BFA;
+  --accent-hover: #8B5CF6;
+}
+
+:root.dark {
+  --bg: #0B0B0C;
+  --card: #111113;
+  --card-hover: #1A1A1E;
+  --border: #1F1F23;
+  --text: #FFFFFF;
+  --text-muted: #A1A1AA;
+  --accent: #A78BFA;
+  --accent-hover: #8B5CF6;
+}
+
+@theme inline {
+  --color-background: var(--bg);
+  --color-foreground: var(--text);
+  --color-muted: var(--text-muted);
+  --color-card: var(--card);
+  --color-card-hover: var(--card-hover);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, Helvetica, sans-serif;
+}
