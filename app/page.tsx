@@ -1,20 +1,30 @@
 import Link from "next/link";
+import ThemeToggle from "@/components/ThemeToggle";
 
-const projects = [
+const experience = [
   {
-    name: "Zeplin Platform",
+    name: "🎨 Zeplin",
+    title: "Senior Product Engineer",
+    subtitle: "macOS · Frontend · Plugins",
     period: "2020–2025",
-    items: [
-      "Zeplin macOS App",
-      "Zeplin Electron App",
-      "Zeplin Plugins for Figma, Sketch, Adobe XD, Photoshop",
-      "Zeplin Web App",
-    ],
+    description:
+      "Owned cross-platform product development across Web, macOS, and plugin ecosystem, contributing to core product features and AI-powered projects.",
   },
   {
-    name: "Fintech & Banking Applications",
+    name: "🏦 Akbank iOS App",
+    title: "Senior iOS Developer",
+    subtitle: "iOS",
     period: "2018–2020",
-    items: ["Akbank Direct iOS App"],
+    description:
+      "Worked on one of Turkey's largest banking apps, contributing to core mobile features and platform modernization.",
+  },
+  {
+    name: "📱 iMobileCode",
+    title: "Mobile Developer",
+    subtitle: "iOS · Android",
+    period: "2014–2018",
+    description:
+      "Developed and maintained multiple mobile applications for both iOS and Android platforms from scratch. Owned the full software development lifecycle, from planning to delivery.",
   },
 ];
 
@@ -23,23 +33,26 @@ export default function Home() {
     <div className="min-h-screen bg-background text-foreground">
       <header className="mx-auto flex max-w-2xl items-center justify-between px-6 py-8">
         <span className="font-semibold tracking-tight">Gülnaz Fıçıcı</span>
-        <nav className="flex gap-6 text-sm text-zinc-500 dark:text-zinc-400">
-          <a href="#projects" className="hover:text-foreground transition-colors">
-            Projects
-          </a>
-          <Link href="/blog" className="hover:text-foreground transition-colors">
-            Blog
-          </Link>
-        </nav>
+        <div className="flex items-center gap-6">
+          <nav className="flex gap-6 text-sm text-muted">
+            <a href="#experience" className="hover:text-foreground transition-colors">
+              Work Experience
+            </a>
+            <Link href="/blog" className="hover:text-foreground transition-colors">
+              Blog
+            </Link>
+          </nav>
+          <ThemeToggle />
+        </div>
       </header>
 
       <main className="mx-auto max-w-2xl px-6 py-20 space-y-24">
         {/* Bio */}
         <section>
           <h1 className="text-4xl font-bold tracking-tight mb-6">
-            Hi, I&apos;m Gülnaz
+            Hi, I&apos;m Gülnaz 👋
           </h1>
-          <p className="text-lg leading-8 text-zinc-600 dark:text-zinc-400 mb-10">
+          <p className="text-lg text-muted mb-10" style={{ lineHeight: "1.6", maxWidth: "580px" }}>
             I&apos;m a software engineer with over 10 years of experience
             crafting high-quality mobile and web applications, with a deep focus
             on iOS and macOS. I&apos;m passionate about staying at the forefront
@@ -54,7 +67,7 @@ export default function Home() {
               href="https://github.com/gulnazficici"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 text-sm font-medium text-zinc-600 hover:text-foreground dark:text-zinc-400 dark:hover:text-foreground transition-colors"
+              className="flex items-center gap-2 text-sm font-medium text-muted hover:text-foreground transition-colors"
             >
               <GitHubIcon />
               GitHub
@@ -63,14 +76,14 @@ export default function Home() {
               href="https://www.linkedin.com/in/gulnaz-ficici/"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 text-sm font-medium text-zinc-600 hover:text-foreground dark:text-zinc-400 dark:hover:text-foreground transition-colors"
+              className="flex items-center gap-2 text-sm font-medium text-muted hover:text-foreground transition-colors"
             >
               <LinkedInIcon />
               LinkedIn
             </a>
             <a
               href="mailto:gulnazficici@gmail.com"
-              className="flex items-center gap-2 text-sm font-medium text-zinc-600 hover:text-foreground dark:text-zinc-400 dark:hover:text-foreground transition-colors"
+              className="flex items-center gap-2 text-sm font-medium text-muted hover:text-foreground transition-colors"
             >
               <MailIcon />
               Contact me
@@ -78,28 +91,79 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Projects */}
-        <section id="projects">
-          <h2 className="text-2xl font-bold tracking-tight mb-8">Projects</h2>
-          <div className="space-y-8">
-            {projects.map((project) => (
-              <div key={project.name} className="border-l-2 border-zinc-200 dark:border-zinc-800 pl-6">
-                <div className="flex items-baseline justify-between mb-3">
-                  <h3 className="font-semibold text-lg">{project.name}</h3>
-                  <span className="text-sm text-zinc-500 dark:text-zinc-400 shrink-0 ml-4">
+        {/* Work Experience */}
+        <section id="experience">
+          <h2 className="text-2xl font-bold tracking-tight mb-8">💼 Work Experience</h2>
+          <div className="flex flex-col gap-4">
+            {experience.map((project) => (
+              <div
+                key={project.name}
+                className="relative rounded-2xl border border-border bg-card p-6 pl-8 transition-all duration-300 hover:border-accent hover:bg-card-hover hover:shadow-lg hover:-translate-y-1 overflow-hidden"
+              >
+                {/* Timeline line */}
+                <div className="absolute left-0 top-0 bottom-0 w-[3px] rounded-full bg-accent" />
+
+                <div className="flex items-start justify-between gap-4 mb-1">
+                  <h3 className="font-semibold text-base leading-snug">{project.name}</h3>
+                  <span className="text-xs text-muted shrink-0 mt-0.5">
                     {project.period}
                   </span>
                 </div>
-                <ul className="space-y-1.5">
-                  {project.items.map((item) => (
-                    <li
+                {(project.title || project.subtitle) && (
+                  <div className="mb-4">
+                    {project.title && (
+                      <p className="text-xs font-semibold text-accent">{project.title}</p>
+                    )}
+                    {project.subtitle && (
+                      <p className="text-xs text-muted">{project.subtitle}</p>
+                    )}
+                  </div>
+                )}
+                {project.description && (
+                  <p className="text-sm text-muted">
+                    {project.description}
+                  </p>
+                )}
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Skills */}
+        <section>
+          <h2 className="text-2xl font-bold tracking-tight mb-8">🛠 Skills</h2>
+          <div className="space-y-6">
+            {[
+              {
+                category: "🍎 Apple Platforms",
+                items: ["iOS", "macOS", "SwiftUI", "UIKit", "AppKit"],
+              },
+              {
+                category: "🌐 Frontend",
+                items: ["React", "TypeScript", "JavaScript"],
+              },
+              {
+                category: "⚙️ Platform & Tooling",
+                items: ["Electron", "CI/CD", "Figma Plugin", "Sketch Plugin", "Adobe XD Plugin"],
+              },
+              {
+                category: "🤖 AI & Product",
+                items: ["AI-powered features", "LLM integration", "OpenAI", "Claude", "Prompt engineering", "AI workflows"],
+              },
+            ].map(({ category, items }) => (
+              <div key={category}>
+                <h3 className="text-xs font-semibold text-accent uppercase tracking-wider mb-3">{category}</h3>
+                <div className="flex flex-wrap gap-3">
+                  {items.map((item) => (
+                    <span
                       key={item}
-                      className="text-zinc-600 dark:text-zinc-400 text-sm"
+                      className="border border-border bg-card text-sm text-muted"
+                      style={{ borderRadius: "999px", padding: "8px 14px" }}
                     >
                       {item}
-                    </li>
+                    </span>
                   ))}
-                </ul>
+                </div>
               </div>
             ))}
           </div>
