@@ -6,43 +6,121 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Editorial paper + ink */
 :root {
-  --bg: #FFFFFF;
-  --card: #F4F4F5;
-  --card-hover: #EBEBED;
-  --border: #E4E4E7;
-  --text: #0B0B0C;
-  --text-muted: #71717A;
-  --accent: #A78BFA;
-  --accent-hover: #8B5CF6;
+  --bg: #F7F3EC;
+  --surface: #FFFDF8;
+  --ink: #231F1A;
+  --muted: #6B6358;
+  --rule: #DDD5C7;
+  --accent: #B5502A;
+
+  /* Studio product tones: card background / text / mark */
+  --peach-bg: #FFE4CF; --peach-fg: #6A2F00; --peach-mark: #F07A2A;
+  --sky-bg: #DDEBFF;   --sky-fg: #0B3A80;   --sky-mark: #3B82F6;
+  --mint-bg: #DCF2E3;  --mint-fg: #115C2E;  --mint-mark: #22A55A;
+  --lilac-bg: #ECE4FF; --lilac-fg: #3F2A85; --lilac-mark: #8B5CF6;
 }
 
 :root.dark {
-  --bg: #0B0B0C;
-  --card: #111113;
-  --card-hover: #1A1A1E;
-  --border: #1F1F23;
-  --text: #FFFFFF;
-  --text-muted: #A1A1AA;
-  --accent: #A78BFA;
-  --accent-hover: #8B5CF6;
+  --bg: #15120E;
+  --surface: #1D1914;
+  --ink: #EDE6DA;
+  --muted: #A39A8C;
+  --rule: #352E26;
+  --accent: #E3895E;
+
+  --peach-bg: #3A2415; --peach-fg: #FFD8BA; --peach-mark: #F08A45;
+  --sky-bg: #16263D;   --sky-fg: #C5DBFF;   --sky-mark: #5B9BFF;
+  --mint-bg: #14301F;  --mint-fg: #B9EACB;  --mint-mark: #3CC274;
+  --lilac-bg: #261F3D; --lilac-fg: #DACFFF; --lilac-mark: #A281FF;
 }
 
 @theme inline {
   --color-background: var(--bg);
-  --color-foreground: var(--text);
-  --color-muted: var(--text-muted);
-  --color-card: var(--card);
-  --color-card-hover: var(--card-hover);
-  --color-border: var(--border);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-rule: var(--rule);
   --color-accent: var(--accent);
-  --color-accent-hover: var(--accent-hover);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-fraunces), Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, Menlo, monospace;
 }
 
 body {
   background: var(--bg);
-  color: var(--text);
-  font-family: Arial, Helvetica, sans-serif;
+  color: var(--ink);
+  font-family: var(--font-sans);
 }
+
+::selection {
+  background: var(--peach-bg);
+  color: var(--peach-fg);
+}
+
+.tone {
+  background: var(--tone-bg);
+  color: var(--tone-fg);
+}
+.tone[data-tone="peach"] { --tone-bg: var(--peach-bg); --tone-fg: var(--peach-fg); --tone-mark: var(--peach-mark); }
+.tone[data-tone="sky"]   { --tone-bg: var(--sky-bg);   --tone-fg: var(--sky-fg);   --tone-mark: var(--sky-mark); }
+.tone[data-tone="mint"]  { --tone-bg: var(--mint-bg);  --tone-fg: var(--mint-fg);  --tone-mark: var(--mint-mark); }
+.tone[data-tone="lilac"] { --tone-bg: var(--lilac-bg); --tone-fg: var(--lilac-fg); --tone-mark: var(--lilac-mark); }
+
+/* Long-form post body */
+.prose {
+  font-size: 1.125rem;
+  line-height: 1.75;
+}
+.prose > * + * { margin-top: 1.25em; }
+.prose h2,
+.prose h3 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+.prose h2 { font-size: 1.75rem; margin-top: 2em; }
+.prose h3 { font-size: 1.35rem; margin-top: 1.75em; }
+.prose a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+.prose ul { list-style: disc; padding-left: 1.25em; }
+.prose ol { list-style: decimal; padding-left: 1.25em; }
+.prose li + li { margin-top: 0.4em; }
+.prose li::marker { color: var(--accent); }
+.prose blockquote {
+  border-left: 2px solid var(--accent);
+  padding-left: 1.25em;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.25rem;
+  color: var(--muted);
+}
+.prose code {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 0.1em 0.35em;
+}
+.prose pre {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  line-height: 1.6;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  overflow-x: auto;
+}
+.prose pre code { background: none; border: 0; padding: 0; font-size: inherit; }
+.prose hr { border: 0; border-top: 1px solid var(--rule); margin: 2.5em 0; }
+.prose img { border-radius: 12px; border: 1px solid var(--rule); }
+.prose table { width: 100%; font-size: 0.95rem; border-collapse: collapse; }
+.prose th, .prose td { border-bottom: 1px solid var(--rule); padding: 0.5em 0.75em 0.5em 0; text-align: left; }
